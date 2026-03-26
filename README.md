@@ -1,8 +1,5 @@
 # 🖋️ Heph — Artisan Sketchbook E-Commerce System
 
-[![Platform: Netlify](https://img.shields.io/badge/Platform-Netlify-00ad9f?style=flat-square&logo=netlify)](https://www.netlify.com/)
-[![Tech: Serverless](https://img.shields.io/badge/Tech-Serverless-ff69b4?style=flat-square&logo=serverless)](https://www.netlify.com/products/functions/)
-
 * Heph : is a bespoke, high-end e-commerce solution developed to manage the full order-to-delivery pipeline for an artisan leather sketchbook brand. The project bridges luxury branding with modern web architecture, providing a seamless user experience and secure backend operations through serverless technology.
 
 🔗 **Live Demo:** [heph.netlify.app](https://heph.netlify.app/)
