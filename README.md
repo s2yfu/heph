@@ -1,2 +1,1 @@
-# heph
-an e-commerce website for my online sketchbooks store , with a smart ordering system . Integrated with Telegram Bot API for real-time order notifications 
+Built a full e-commerce ordering system for a leather sketchbook business I founded, integrated with Telegram Bot API for real-time order notifications, deployed on Netlify. you can check the site from the link here : https://heph.netlify.app/
