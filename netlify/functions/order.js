@@ -1,43 +1,61 @@
-const https = require('https');
-
-exports.handler = async function(event) {
+exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  const order = JSON.parse(event.body);
-  const token = process.env.TG_TOKEN;
-  const chatId = process.env.TG_CHAT_ID;
+  try {
+    const order = JSON.parse(event.body);
 
-  const text = `🖋️ NEW HEPH ORDER\n━━━━━━━━━━━━━━━━━━\n👤 Name: ${order.name}\n📞 Phone: ${order.phone}\n📍 Wilaya: ${order.wilaya}\n🏠 Address: ${order.address}\n━━━━━━━━━━━━━━━━━━\n📐 Size: ${order.size}\n📄 Pages: ${order.pages}\n🟫 Cover: ${order.cover}\n✒️ Embossing: ${order.emboss}\n━━━━━━━━━━━━━━━━━━\n📝 Notes: ${order.notes}\n🕐 Time: ${order.timestamp}`;
+    // Using HTML instead of Markdown for better stability with special characters
+    const msg =
+`🖋️ <b>NEW HEPH ORDER</b>
+━━━━━━━━━━━━━━━━━━
+👤 <b>Name:</b> ${order.name}
+📞 <b>Phone:</b> ${order.phone}
+📍 <b>Wilaya:</b> ${order.wilaya}
+🏠 <b>Address:</b> ${order.address}
+━━━━━━━━━━━━━━━━━━
+📐 <b>Size:</b> ${order.size}
+📄 <b>Pages:</b> ${order.pages}
+🟫 <b>Cover:</b> ${order.cover}
+✒️ <b>Embossing:</b> ${order.emboss}
+━━━━━━━━━━━━━━━━━━
+📝 <b>Notes:</b> ${order.notes}
+🕐 <b>Time:</b> ${order.timestamp}`;
 
-  const payload = JSON.stringify({ chat_id: chatId, text: text });
-
-  return new Promise((resolve) => {
-    const req = https.request({
-      hostname: 'api.telegram.org',
-      path: `/bot${token}/sendMessage`,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(payload)
+    const res = await fetch(
+      `https://api.telegram.org/bot${process.env.TG_TOKEN}/sendMessage`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: process.env.TG_CHAT_ID,
+          text: msg,
+          parse_mode: 'HTML'
+        })
       }
-    }, (res) => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
-      res.on('end', () => {
-        const result = JSON.parse(data);
-        if (result.ok) {
-          resolve({ statusCode: 200, body: JSON.stringify({ success: true }) });
-        } else {
-          resolve({ statusCode: 500, body: JSON.stringify({ error: result }) });
-        }
-      });
-    });
-    req.on('error', (e) => {
-      resolve({ statusCode: 500, body: JSON.stringify({ error: e.message }) });
-    });
-    req.write(payload);
-    req.end();
-  });
+    );
+
+    const data = await res.json();
+
+    if (data.ok) {
+      // Returning success: true to match index.html logic
+      return { 
+        statusCode: 200, 
+        body: JSON.stringify({ success: true }) 
+      };
+    } else {
+      console.error('Telegram API Error:', data);
+      return { 
+        statusCode: 500, 
+        body: JSON.stringify({ success: false, error: data.description }) 
+      };
+    }
+
+  } catch (err) {
+    return { 
+      statusCode: 500, 
+      body: JSON.stringify({ success: false, error: err.message }) 
+    };
+  }
 };
