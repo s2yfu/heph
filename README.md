@@ -2,7 +2,7 @@
 
 * Heph : is a bespoke, high-end e-commerce solution developed to manage the full order-to-delivery pipeline for an artisan leather sketchbook brand. The project bridges luxury branding with modern web architecture, providing a seamless user experience and secure backend operations through serverless technology...
 
-🔗 **Live Demo:** [heph.netlify.app](https://heph.netlify.app/)
+🔗 **Live Demo:** [heph.vercel.app](https://heph.vercel.app/)
 
 ---
 
