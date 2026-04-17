@@ -1,26 +1,22 @@
-export default async function handler(req, res) {
-  // التأكد من أن الطلب POST فقط
+// api/order.js
+const fetch = require('node-fetch'); 
+
+module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
   try {
-    const order = req.body; // Vercel يحلل الـ JSON تلقائياً
+    const order = req.body;
 
     const msg = `
-🖋️ <b>NEW HEPH ORDER</b>
-━━━━━━━━━━━━━━━━━━
+<b>NEW HEPH ORDER</b>
 👤 <b>Name:</b> ${order.name}
 📞 <b>Phone:</b> ${order.phone}
 📍 <b>Wilaya:</b> ${order.wilaya}
 🏠 <b>Address:</b> ${order.address}
-━━━━━━━━━━━━━━━━━━
 📐 <b>Size:</b> ${order.size}
-📄 <b>Pages:</b> ${order.pages}
 🟫 <b>Cover:</b> ${order.cover}
-✒️ <b>Embossing:</b> ${order.emboss}
-━━━━━━━━━━━━━━━━━━
-📝 <b>Notes:</b> ${order.notes}
 🕐 <b>Time:</b> ${order.timestamp}`;
 
     const telegramRes = await fetch(
@@ -46,4 +42,4 @@ export default async function handler(req, res) {
   } catch (err) {
     return res.status(500).json({ success: false, error: err.message });
   }
-}
+};
