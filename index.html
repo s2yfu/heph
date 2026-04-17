@@ -102,10 +102,7 @@
     .hero-cta::before { content: ''; position: absolute; inset: 0; background: var(--gold); transform: translateX(-101%); transition: transform 0.4s cubic-bezier(0.77,0,0.175,1); z-index: -1; }
     .hero-cta:hover::before { transform: translateX(0); }
 
-    .scroll-indicator { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; animation: fadeUp 1s 1.2s forwards; }
-    .scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s infinite; }
-
-    /* ─── ABOUT ─── */
+    /* ─── ABOUT & FEATURES ─── */
     #about { padding: 120px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; }
     .about-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 300; margin-bottom: 30px; }
     .about-text { color: var(--cream-dim); line-height: 1.9; font-size: 0.85rem; margin-bottom: 20px; }
@@ -114,8 +111,6 @@
     .stat-row { display: flex; gap: 40px; margin-top: 40px; }
     .stat { border-left: 1px solid var(--gold); padding-left: 20px; }
     .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--gold); }
-
-    /* ─── FEATURES ─── */
     #features { background: var(--dark2); padding: 100px 60px; }
     .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1100px; margin: 0 auto; }
     .feature-card { background: var(--dark3); padding: 50px 40px; transition: background 0.3s; }
@@ -125,28 +120,27 @@
     /* ─── ORDER FORM ─── */
     #order { padding: 120px 60px; max-width: 900px; margin: 0 auto; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
     .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
     input, select, textarea {
       background: transparent; border: none; border-bottom: 1px solid rgba(201,168,76,0.3);
       padding: 14px 0; color: var(--cream); font-family: 'Montserrat', sans-serif; width: 100%; outline: none;
     }
+    textarea { height: 100px; resize: none; }
     .submit-btn {
       margin: 40px auto 0; padding: 18px 60px; background: transparent; border: 1px solid var(--gold);
-      color: var(--gold); text-transform: uppercase; cursor: pointer; display: block;
+      color: var(--gold); text-transform: uppercase; cursor: pointer; display: block; transition: 0.4s;
     }
     .submit-btn:hover { background: var(--gold); color: var(--dark); }
-
     #success-msg { display: none; text-align: center; padding: 60px; }
     .check { width: 70px; height: 70px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; font-size: 1.8rem; color: var(--gold); }
 
     footer { border-top: 1px solid rgba(201,168,76,0.1); padding: 50px 60px; display: flex; justify-content: space-between; align-items: center; }
-
     .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-    @keyframes scrollPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
     @media (max-width: 900px) {
       nav { padding: 20px 24px; } .nav-links { display: none; }
       #about { grid-template-columns: 1fr; padding: 80px 24px; }
@@ -175,79 +169,50 @@
     <p class="hero-sub">Artisan leather sketchbooks crafted for those who create</p>
     <a href="#order" class="hero-cta">Commission Yours</a>
   </div>
-  <div class="scroll-indicator">
-    <div class="scroll-line"></div>
-  </div>
 </section>
 
 <section id="about">
   <div>
-    <p class="about-label reveal">Our Story</p>
-    <h2 class="about-heading reveal">Built for<br><em>Serious</em><br>Creators</h2>
+    <h2 class="about-heading reveal">Built for <em>Serious</em> Creators</h2>
     <p class="about-text reveal">Every Heph sketchbook is crafted with intention — for artists who demand more than mass-produced paper.</p>
     <div class="stat-row reveal">
-      <div class="stat">
-        <div class="stat-num">200+</div>
-        <div class="stat-label">GSM Paper</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Real Leather</div>
-      </div>
+      <div class="stat"><div class="stat-num">200+</div><div class="stat-label">GSM Paper</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Real Leather</div></div>
     </div>
   </div>
-  <div class="about-visual reveal">
-    <div class="about-img-wrap"></div>
-  </div>
-</section>
-
-<section id="features">
-  <div class="features-grid">
-    <div class="feature-card reveal">
-      <h3 class="feature-name">Premium Paper</h3>
-      <p class="feature-desc">Acid-free, heavyweight sheets that won't bleed.</p>
-    </div>
-    <div class="feature-card reveal">
-      <h3 class="feature-name">Genuine Leather</h3>
-      <p class="feature-desc">Full-grain covers that develop a unique patina.</p>
-    </div>
-    <div class="feature-card reveal">
-      <h3 class="feature-name">Nationwide Delivery</h3>
-      <p class="feature-desc">We deliver across all 58 wilayas in Algeria.</p>
-    </div>
-  </div>
+  <div class="about-visual reveal"><div class="about-img-wrap"></div></div>
 </section>
 
 <section id="order">
   <div id="order-form-wrap">
     <form id="order-form" onsubmit="submitOrder(event)">
       <div class="form-grid">
-        <div class="form-group reveal">
-          <input type="text" id="name" placeholder="Full Name" required />
-        </div>
-        <div class="form-group reveal">
-          <input type="tel" id="phone" placeholder="Phone (e.g. 0550...)" required />
-        </div>
-        <div class="form-group reveal">
-          <input type="text" id="wilaya" placeholder="Wilaya" required />
-        </div>
-        <div class="form-group reveal">
-          <input type="text" id="address" placeholder="Detailed Address" required />
-        </div>
-        <div class="form-group reveal">
+        <div class="form-group reveal"><label>Full Name</label><input type="text" id="name" required /></div>
+        <div class="form-group reveal"><label>Phone</label><input type="tel" id="phone" required /></div>
+        <div class="form-group reveal"><label>Wilaya</label><input type="text" id="wilaya" required /></div>
+        <div class="form-group reveal"><label>Detailed Address</label><input type="text" id="address" required /></div>
+        <div class="form-group reveal"><label>Size</label>
           <select id="size" required>
-            <option value="" disabled selected>Size</option>
             <option value="A5">A5 Standard</option>
             <option value="A4">A4 Large</option>
+            <option value="Square">Square 20x20</option>
           </select>
         </div>
-        <div class="form-group reveal">
+        <div class="form-group reveal"><label>Pages</label>
+          <select id="pages" required>
+            <option value="80">80 pages</option>
+            <option value="120">120 pages</option>
+            <option value="160">160 pages</option>
+          </select>
+        </div>
+        <div class="form-group reveal"><label>Cover Color</label>
           <select id="cover" required>
-            <option value="" disabled selected>Color</option>
             <option value="Black">Classic Black</option>
             <option value="Brown">Dark Brown</option>
           </select>
         </div>
+        <div class="form-group reveal"><label>Embossing Name</label><input type="text" id="emboss" placeholder="Optional" /></div>
+        <div class="form-group full reveal"><label>Notes</label><textarea id="notes"></textarea></div>
       </div>
       <button type="submit" class="submit-btn" id="submit-btn">Place Order</button>
     </form>
@@ -265,23 +230,21 @@
 </footer>
 
 <script>
-  // Cursor Logic
+  // Cursor
   const cursor = document.getElementById('cursor');
   document.addEventListener('mousemove', e => {
     cursor.style.left = e.clientX + 'px';
     cursor.style.top = e.clientY + 'px';
   });
 
-  // Reveal Logic
+  // Reveal
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // --- API FIX ---
-  const API_URL = '/api/order'; // Vercel path
+  // --- API FIX FOR VERCEL ---
+  const API_URL = '/api/order'; 
 
   async function submitOrder(e) {
     e.preventDefault();
@@ -295,8 +258,11 @@
       wilaya:  document.getElementById('wilaya').value,
       address: document.getElementById('address').value,
       size:    document.getElementById('size').value,
+      pages:   document.getElementById('pages').value,
       cover:   document.getElementById('cover').value,
-      timestamp: new Date().toLocaleString()
+      emboss:  document.getElementById('emboss').value || 'None',
+      notes:   document.getElementById('notes').value || 'None',
+      timestamp: new Date().toLocaleString('en-GB')
     };
 
     try {
@@ -305,13 +271,14 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(order)
       });
+      
       const data = await res.json();
       
       if (data.success) {
         document.getElementById('order-form').style.display = 'none';
         document.getElementById('success-msg').style.display = 'block';
       } else {
-        throw new Error(data.error || 'Failed');
+        throw new Error(data.error || 'Server error');
       }
     } catch (err) {
       alert('Error: ' + err.message);
